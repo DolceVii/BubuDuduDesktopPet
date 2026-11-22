@@ -1,0 +1,21 @@
+# Windows / Explorer
+Thumbs.db
+Desktop.ini
+*.lnk
+
+# Editor / temporary
+.vscode/
+.idea/
+*.tmp
+*.bak
+*.log
+
+# Local data and authentic captures (review before publication)
+learning-v1.json
+learning-v1.bak
+docs/screenshots/*.png
+
+# Python development helpers
+__pycache__/
+*.pyc
+.venv/

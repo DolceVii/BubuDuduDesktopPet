@@ -1,0 +1,28 @@
+name: PowerShell syntax check
+
+'on':
+  push:
+  pull_request:
+
+jobs:
+  syntax:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Parse BubuDudu.ps1 with Windows PowerShell
+        shell: powershell
+        run: |
+          $tokens = $null
+          $errors = $null
+          [void][System.Management.Automation.Language.Parser]::ParseFile(
+            (Join-Path (Get-Location) 'BubuDudu.ps1'),
+            [ref]$tokens,
+            [ref]$errors
+          )
+          if ($errors.Count -gt 0) {
+            $errors | Format-List | Out-Host
+            exit 1
+          }
+          Write-Host 'PowerShell syntax OK'
